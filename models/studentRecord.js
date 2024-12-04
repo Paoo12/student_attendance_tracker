@@ -31,3 +31,7 @@ const studentRecordSchema = mongoose.Schema({
     },
 
 });
+
+const StudentRecord = mongoose.model('StudentRecord', studentRecordSchema);
+
+module.exports = StudentRecord;
