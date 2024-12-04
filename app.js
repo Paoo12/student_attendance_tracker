@@ -7,11 +7,13 @@ const uri = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const YAML = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
+const authRoutes = require('./routes/authRoutes.js');
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.static('public'));
+app.use(authRoutes);
 
 //swagger documentation
 const swaggerDocument = YAML.load('./swagger.yaml');
