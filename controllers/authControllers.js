@@ -27,6 +27,7 @@ exports.login = async (req, res) => {
 
         //Create a cookie and place the JWT inside of it
         res.cookie('jwt', token, { maxAge: 5 * 60 * 1000, httpOnly: true });
+
         res.redirect('/attendance');
 
     } catch (error) {
