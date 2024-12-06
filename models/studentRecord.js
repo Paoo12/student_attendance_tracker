@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const attendanceSchema = mongoose.Schema({
 
+const attendanceSchema = mongoose.Schema({
     date: {
         type: Date,
         required: true,
@@ -10,9 +10,6 @@ const attendanceSchema = mongoose.Schema({
         enum: ['present', 'absent'],
         required: true,
     }
-
-
-
 });
 
 const studentRecordSchema = mongoose.Schema({
@@ -28,8 +25,7 @@ const studentRecordSchema = mongoose.Schema({
     attendance: {
         type: [attendanceSchema],
         default: [],
-    },
-
+    }
 });
 
 const StudentRecord = mongoose.model('StudentRecord', studentRecordSchema);

@@ -6,31 +6,33 @@ const PORT = process.env.PORT || 8080;
 const uri = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const YAML = require('yamljs');
-const swaggerUi = require('swagger-ui-express');
+const swaggerUI = require('swagger-ui-express');
 const authRoutes = require('./routes/authRoutes.js');
+const cookieParser = require('cookie-parser');
+
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.static('public'));
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(authRoutes);
 
-//swagger documentation
-const swaggerDocument = YAML.load('./swagger.yaml');
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-//connection logic connect to mongodb
+//Swagger documentation
+const swaggerDocument = YAML.load('./swagger.yaml');
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+//Connect to MongoDB
 mongoose.connect(uri).then(
     async () => {
 
-        console.log(`Connected to MongoDB Database`)
+        console.log(`Connected to MongoDB database`);
 
         app.listen(PORT, () => {
             console.log(`Connected to port ${PORT}`);
         });
     }
-).catch((err) => {
-    console.log(`Error connecting to MongoDB Database: ${err}`);
-});
-
-
+).catch((err) => { console.log(`Error connecting to database: ${err}`); });

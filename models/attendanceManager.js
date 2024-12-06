@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const attendanceManagerSchema = mongoose.Schema({
-
+//Define the schema for the attendance manager
+const attendaceManagerSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -14,12 +14,11 @@ const attendanceManagerSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        dafualt: 'Attendance Manager',
+        default: 'Attendance Manager',
         enum: ['Attendance Manager', 'Student'],
     }
-
 });
 
-const AttendanceManager = mongoose.model('AttendanceManager', attendanceManagerSchema);
+const AttendanceManager = mongoose.model('AttendanceManager', attendaceManagerSchema);
 
 module.exports = AttendanceManager;
