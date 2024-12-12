@@ -9,16 +9,19 @@ const YAML = require('yamljs');
 const swaggerUI = require('swagger-ui-express');
 const authRoutes = require('./routes/authRoutes.js');
 const cookieParser = require('cookie-parser');
+const { authenticateToken } = require('./middlewares/auth.js')
+
 
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
-
-app.use(express.static('public'));
 app.use(cookieParser());
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(authRoutes);
+app.use(authenticateToken);
+
 
 
 //Swagger documentation
